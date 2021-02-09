@@ -106,5 +106,5 @@ The `/waypoint_updater` node constantly looks ahead for the next `LOOKAHEAD_WPS 
 The `/twist_controller` node uses a yaw PID controller and throttle PID controller to determine steering, throttle and braking to keep the desired heading and speed. If the speed gets close to zero, the throttle is set to zero and the brake is engaged to hold the vehicle in place. Throttle PID control uses a low pass filtered vehicle speed to calculate the error term in order to produce a smooth output.
 ### Traffic light detection
 
-The `/tl_detector` node constantly determines the processing of the incoming needs to be done or not. The function either returns the waypoint index of the stop line when the traffic light is `RED` or `YELLOW` or it returns `-1` if no traffic light stop state has been detected (`get_light_state`). The label of the images provided along with camera images is been used to classify the light color.
+The `/tl_detector` node constantly determines the processing of the incoming needs to be done or not. The function either returns the waypoint index of the stop line when the traffic light is `RED` or `YELLOW` or it returns `-1` if no traffic light stop state has been detected (`get_light_state`). The label of the images provided along with camera images in the simulator is been used to classify the light color.
 
