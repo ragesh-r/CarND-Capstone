@@ -86,3 +86,25 @@ Specific to these libraries, the simulator grader and Carla use the following:
 | OpenMP | N/A | N/A |
 
 We are working on a fix to line up the OpenCV versions between the two.
+
+
+
+### Project OVerview
+The Udacity Carla ROS environment for this project uses the following nodes and topics.
+
+![alt text][image1]
+
+The `/waypoint_loader` reads the map or trajectory information and publishes a list of waypoints that the vehicle can follow safely. The `/tl_detector` node takes this information and the camera image from the vehicle - either simulation or real - and publishes the state of the traffic light ahead. The `/waypoint_updater` node determines the desired speed for the waypoints ahead. The drive-by-wire commands for the vehicle are determined by `/dbw_node` node based on the information about the waypoints necessary for steering, throttle and braking control signals
+
+## Project Steps
+
+### Waypoint Updater 
+
+The `/waypoint_updater` node constantly looks ahead for the next `LOOKAHEAD_WPS = 150` waypoints. If the next traffic light is either `GREEN` or `UNKNOWN`, it will not change the desired speed at the waypoints ahead. If the next traffic light is either `RED` or `YELLOW`, it will use decelerating speed for the waypoints ahead. The vehicle might detect a `RED` or `YELLOW` traffic light, but will only react if the stop line of this traffic light is within distance of the next `LOOKAHEAD_WPS` waypoints. The decelerated speed is calculated as a minimum of the desired speed at the waypoints ahead and a square root function with a given `MAX_DECEL` deceleration so that zero speed at the stop line of the traffic light is achieved without violating the jerk limit.
+### DBW Node
+
+The `/twist_controller` node uses a yaw PID controller and throttle PID controller to determine steering, throttle and braking to keep the desired heading and speed. If the speed gets close to zero, the throttle is set to zero and the brake is engaged to hold the vehicle in place. Throttle PID control uses a low pass filtered vehicle speed to calculate the error term in order to produce a smooth output.
+### Traffic light detection
+
+The `/tl_detector` node constantly determines the processing of the incoming needs to be done or not. The function either returns the waypoint index of the stop line when the traffic light is `RED` or `YELLOW` or it returns `-1` if no traffic light stop state has been detected (`get_light_state`). The label of the images provided along with camera images is been used to classify the light color.
+
