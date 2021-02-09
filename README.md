@@ -1,7 +1,7 @@
 This is the project repo for the final project of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. For more information about the project, see the project introduction [here](https://classroom.udacity.com/nanodegrees/nd013/parts/6047fe34-d93c-4f50-8336-b70ef10cb4b2/modules/e1a23b06-329a-4684-a717-ad476f0d8dff/lessons/462c933d-9f24-42d3-8bdc-a08a5fc866e4/concepts/5ab4b122-83e6-436d-850f-9f4d26627fd9).
 
 Please use **one** of the two installation options, either native **or** docker installation.
-[image1]: ./imgs/overview.png
+
 ### Native Installation
 
 * Be sure that your workstation is running Ubuntu 16.04 Xenial Xerus or Ubuntu 14.04 Trusty Tahir. [Ubuntu downloads can be found here](https://www.ubuntu.com/download/desktop).
@@ -92,7 +92,7 @@ We are working on a fix to line up the OpenCV versions between the two.
 ### Project OVerview
 The Udacity Carla ROS environment for this project uses the following nodes and topics.
 
-![alt text][image1]
+![](imgs/overview.png)
 
 The `/waypoint_loader` reads the map or trajectory information and publishes a list of waypoints that the vehicle can follow safely. The `/tl_detector` node takes this information and the camera image from the vehicle - either simulation or real - and publishes the state of the traffic light ahead. The `/waypoint_updater` node determines the desired speed for the waypoints ahead. The drive-by-wire commands for the vehicle are determined by `/dbw_node` node based on the information about the waypoints necessary for steering, throttle and braking control signals
 
